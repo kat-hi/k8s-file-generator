@@ -1,4 +1,4 @@
-# k8s-app-gen
+# k8s-file-gen
 
 ## Project setup
 ```
