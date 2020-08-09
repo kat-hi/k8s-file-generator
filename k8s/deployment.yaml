@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: file-generator
-          image: registry.datexis.com/ksachs/file-generator:v1
+          image: registry.datexis.com/ksachs/file-generator:v6
           ports:
             - name: client-port
               containerPort: 8080 
