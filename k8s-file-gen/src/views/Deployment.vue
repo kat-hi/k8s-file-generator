@@ -10,23 +10,23 @@
                   <b-form>
 
                     <b-form-group label="deployment name:">
-                      <b-form-input v-model="form.deploymentName" required placeholder="choose a custom deployment name"></b-form-input>
+                      <b-form-input v-model="form.deploymentName" required></b-form-input>
                     </b-form-group>
 
                     <b-form-group label="image name:" description="schema: registry.datexis.com/<namespace>/<imagename>:<tag>">
-                      <b-form-input v-model="form.imageName" required placeholder="what's imagename?"></b-form-input>
+                      <b-form-input v-model="form.imageName" required></b-form-input>
                     </b-form-group>
 
                     <b-form-group label="namespace:">
-                      <b-form-input v-model="form.namespace" required placeholder="where to deploy?"></b-form-input>
+                      <b-form-input v-model="form.namespace" required></b-form-input>
                     </b-form-group>
 
                     <b-form-group label="container port:">
-                      <b-form-input v-model="form.containerPort" required placeholder="what's your container port?"></b-form-input>
+                      <b-form-input v-model="form.containerPort" required></b-form-input>
                     </b-form-group>
 
                     <b-form-group label="container name:">
-                      <b-form-input v-model="form.containerPort" required placeholder="what's your container name?"></b-form-input>
+                      <b-form-input v-model="form.containerName" required></b-form-input>
                     </b-form-group>
 
                     <b-form-group label="choose advanced settings:" class="annotations">
@@ -167,7 +167,9 @@
 .main {
   padding: 0vw 3vw 0vw 3vw;
 }
-
+.card {
+  margin-top: 1.88vh
+}
 .button {
   width: 245px;
   margin-right: 2vw

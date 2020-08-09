@@ -1,18 +1,20 @@
-# base image
-FROM node:12.2.0-alpine AS buildbase
+FROM node:10.22.0-alpine3.9
 
-# get code into container
+# copy project files and folders to the current working directory (folder)
+COPY package.json .
+
+# install project dependencies
+RUN npm install
+
 COPY . .
 
-ENV env=production
+RUN npm rebuild node-sass --force
 
-RUN npm install
-# start app
-RUN npm run-script build
+EXPOSE 8080
 
+CMD [ "npm", "run", "serve" ]
 
-FROM buildbase
+RUN npm rebuild node-sass --force
 
-RUN npm install -g serve
+CMD [ "npm", "run", "serve" ]
 
-CMD serve -s build -l 8080

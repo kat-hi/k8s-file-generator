@@ -1,7 +1,7 @@
 <template>
   <b-card-body>
     <b-card-text>
-      <b-card header="yaml" v-b-toggle.accordion-2>
+      <b-card header="json" v-b-toggle.accordion-2>
         <b-collapse id="accordion-2" visible accordion="my-accordion" role="tabpanel">
           <pre>{{ jsonfile }}</pre>
         </b-collapse>

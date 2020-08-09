@@ -1,5 +1,13 @@
 <template>
-    <div class="row main">
+  <div>
+    <b-row class="m-5 p-0">
+      <b-card>
+          <b-card-body>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+          </b-card-body>
+      </b-card>
+    </b-row>
+    <div class="row">
      <b-col>
       <b-card class="deploymentCard"
           img-alt="Image"
@@ -49,6 +57,7 @@
         </b-card>
     </b-col>
   </div>
+  </div>
 </template>
 
 <script>
@@ -72,7 +81,7 @@
 <style scoped>
   .row {
     justify-content: space-around;
-    padding: 8vw;
+    padding: 2vw 5vw 0 5vw;
   }
   .image {
       width: 100%;

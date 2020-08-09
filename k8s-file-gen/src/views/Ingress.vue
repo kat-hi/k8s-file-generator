@@ -10,7 +10,7 @@
                 <b-card-body class="card">
                   <b-form>
                     <b-form-group label="custom ingress name:">
-                      <b-form-input v-model="form.ingressName" required placeholder="choose a custom ingress name"></b-form-input>
+                      <b-form-input v-model="form.ingressName" required></b-form-input>
                     </b-form-group>
 
                     <b-form-group small label="domain:">
@@ -18,19 +18,19 @@
                    </b-form-group>
 
                     <b-form-group label="subdomain:">
-                      <b-form-input v-model="form.prefix" required placeholder="what's your subdomain name?"></b-form-input>
+                      <b-form-input v-model="form.prefix" required></b-form-input>
                     </b-form-group>
 
                     <b-form-group label="service name:">
-                      <b-form-input v-model="form.serviceName" required placeholder="what's your service name?"></b-form-input>
+                      <b-form-input v-model="form.serviceName" required></b-form-input>
                     </b-form-group>
 
                     <b-form-group label="service port:">
-                      <b-form-input v-model="form.servicePort" required placeholder="what's your service port?"></b-form-input>
+                      <b-form-input v-model="form.servicePort" required></b-form-input>
                     </b-form-group>
 
                     <b-form-group label="namespace:">
-                      <b-form-input v-model="form.namespace" required placeholder="where to deploy?"></b-form-input>
+                      <b-form-input v-model="form.namespace" required></b-form-input>
                     </b-form-group>
 
                     <b-form-group label="choose more annotations:" class="annotations">
@@ -72,7 +72,7 @@
             prefix: '',
             namespace: '',
           },
-           domains: [{ text: 'Select One', value: "" }, 'demo.datexis.com', 'apps.datexis.com', 'internal.datexis.com', 'api.datexis.com'],
+           domains: [{ text: 'choose...', value: "" }, 'demo.datexis.com', 'app.datexis.com', 'internal.datexis.com', 'api.datexis.com'],
            options: ['enable CORS', 'restriction to beuth network', 'cors-allow-origin'],
            sourceRange: '*'
          }
@@ -97,7 +97,7 @@
                      "hosts": [
                        this.form.prefix + "." + this.form.domainName
                      ],
-                     "secretName": this.form.prefix + "-" + this.form.namespace + "ingress-tls"
+                     "secretName": this.form.prefix + "-" + this.form.namespace + "-ingress-tls"
                    }
                  ],
                  "rules": [
@@ -134,6 +134,9 @@
 .row, .col {
   margin: 0;
   padding: 0;
+}
+.card {
+  margin-top: 1.88vh
 }
 .left-icon {
   margin-right: 1vw

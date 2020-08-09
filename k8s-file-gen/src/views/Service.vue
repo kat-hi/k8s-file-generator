@@ -6,19 +6,19 @@
                 <b-card-body class="card">
                   <b-form>
                     <b-form-group label="custom service name:">
-                      <b-form-input v-model="form.serviceName" required placeholder="choose a custom service name"></b-form-input>
+                      <b-form-input v-model="form.serviceName" required></b-form-input>
                     </b-form-group>
 
                     <b-form-group small label="service port">
-                      <b-form-input v-model="form.servicePort" required placeholder="what's your service port?"></b-form-input>
+                      <b-form-input v-model="form.servicePort" required></b-form-input>
                    </b-form-group>
 
                     <b-form-group label="namespace:">
-                      <b-form-input v-model="form.namespace" required placeholder="where to deploy?"></b-form-input>
+                      <b-form-input v-model="form.namespace" required></b-form-input>
                     </b-form-group>
 
                     <b-form-group label="deployment name">
-                      <b-form-input v-model="form.servicePort" required placeholder="what's your label selector?"></b-form-input>
+                      <b-form-input v-model="form.deploymentName" required></b-form-input>
                     </b-form-group>
                   </b-form>
                 </b-card-body>
@@ -110,6 +110,9 @@
 }
 .left-icon {
   margin-right: 1vw
+}
+.card {
+  margin-top: 1.88vh
 }
 .right-button {
   width: 260px;
