@@ -1,11 +1,12 @@
 <template>
   <div>
-      <b-navbar toggleable="xl" variant="light">
+      <b-navbar toggleable="xl" type="dark" variant="dark">
         <b-navbar-brand @click="goHome" class="brand">K8s-Files-Generator</b-navbar-brand>
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
             <NavigationElement route="Home" title="Home" />
+            <NavigationElement route="Notes" title="Notes" />
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
