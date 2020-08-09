@@ -5,3 +5,4 @@
  this app provides web-GUI support for creating deployment-, service- and -ingress files (yaml and json).
  
  
+ https://filegenerator.app.datexis.com/
