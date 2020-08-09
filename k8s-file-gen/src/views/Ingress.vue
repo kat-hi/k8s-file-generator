@@ -14,23 +14,23 @@
                 <b-card-body class="card">
                   <b-form>
                     <b-form-group label="custom ingress name:">
-                      <b-form-input v-model="form.ingressName" required></b-form-input>
+                      <b-form-input v-model="form.ingressname" required></b-form-input>
                     </b-form-group>
 
                     <b-form-group small label="domain:">
-                      <b-form-select v-model="form.domainName" :options="domains" required></b-form-select>
+                      <b-form-select v-model="form.domainname" :options="domains" required></b-form-select>
                    </b-form-group>
 
                     <b-form-group label="subdomain:">
-                      <b-form-input v-model="form.prefix" required></b-form-input>
+                      <b-form-input v-model="form.subdomain" required></b-form-input>
                     </b-form-group>
 
                     <b-form-group label="service name:">
-                      <b-form-input v-model="form.serviceName" required></b-form-input>
+                      <b-form-input v-model="form.servicename" required></b-form-input>
                     </b-form-group>
 
                     <b-form-group label="service port:">
-                      <b-form-input v-model="form.servicePort" required></b-form-input>
+                      <b-form-input v-model="form.serviceport" required></b-form-input>
                     </b-form-group>
 
                     <b-form-group label="namespace:">
@@ -70,12 +70,12 @@
       data() {
         return {
           form: {
-            ingressName: '',
-            servicePort: '',
-            serviceName: '',
-            domainName: '',
-            prefix: '',
-            namespace: '',
+            ingressname: this.$store.state.ingressname,
+            serviceport: this.$store.state.serviceport,
+            servicename: this.$store.state.servicename,
+            domainname: this.$store.state.domainname,
+            subdomain: this.$store.state.subdomain,
+            namespace: this.$store.state.namespace,
           },
            domains: [{ text: 'choose...', value: "" }, 'demo.datexis.com', 'app.datexis.com', 'internal.datexis.com', 'api.datexis.com'],
            options: ['enable CORS', 'restriction to beuth network', 'cors-allow-origin'],
@@ -89,7 +89,7 @@
                "kind": "Ingress",
                "apiVersion": "extensions/v1beta1",
                "metadata": {
-                 "name": this.form.ingressName,
+                 "name": this.form.ingressname,
                  "namespace": this.form.namespace,
                  "annotations": {
                    "cert-manager.io/cluster-issuer": "letsencrypt",
@@ -100,20 +100,20 @@
                  "tls": [
                    {
                      "hosts": [
-                       this.form.prefix + "." + this.form.domainName
+                       this.form.subdomain + "." + this.form.domainname
                      ],
-                     "secretName": this.form.prefix + "-" + this.form.namespace + "-ingress-tls"
+                     "secretName": this.form.subdomain + "-" + this.form.namespace + "-ingress-tls"
                    }
                  ],
                  "rules": [
                    {
-                     "host": this.form.prefix + "." + this.form.domainName,
+                     "host": this.form.subdomain + "." + this.form.domainname,
                      "http": {
                        "paths": [
                          {
                            "backend": {
-                             "serviceName": this.form.serviceName,
-                             "servicePort": this.form.servicePort
+                             "serviceName": this.form.servicename,
+                             "servicePort": this.form.serviceport
                            }
                          }
                        ]
@@ -128,10 +128,20 @@
            }
          },
      methods: {
+       commitChanges () {
+         this.$store.commit('setIngressName', this.form.ingressname)
+         this.$store.commit('setDomainName', this.form.domainname)
+         this.$store.commit('setSubdomain', this.form.subdomain)
+         this.$store.commit('setNamespace', this.form.namespace)
+         this.$store.commit('setServiceName', this.form.servicename)
+         this.$store.commit('setServicePort', this.form.serviceport)
+       },
        openService () {
+         this.commitChanges()
          this.$router.push({ name: 'Service' })
        },
        viewAll () {
+         this.commitChanges()
          this.$router.push({ name: 'Overview' })
        }
      }

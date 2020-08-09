@@ -14,11 +14,11 @@
                 <b-card-body class="card">
                   <b-form>
                     <b-form-group label="custom service name:">
-                      <b-form-input v-model="form.serviceName" required></b-form-input>
+                      <b-form-input v-model="form.servicename" required></b-form-input>
                     </b-form-group>
 
                     <b-form-group small label="service port">
-                      <b-form-input v-model="form.servicePort" required></b-form-input>
+                      <b-form-input v-model="form.serviceport" required></b-form-input>
                    </b-form-group>
 
                     <b-form-group label="namespace:">
@@ -26,7 +26,7 @@
                     </b-form-group>
 
                     <b-form-group label="deployment name">
-                      <b-form-input v-model="form.deploymentName" required></b-form-input>
+                      <b-form-input v-model="form.deploymentname" required></b-form-input>
                     </b-form-group>
                   </b-form>
                 </b-card-body>
@@ -59,10 +59,11 @@
       data() {
         return {
           form: {
-            servicePort: '',
-            serviceName: '',
-            namespace: '',
-            deploymentName: ''
+            serviceport: this.$store.state.serviceport,
+            targetport: this.$store.state.targetport,
+            servicename: this.$store.state.servicename,
+            namespace: this.$store.state.namespace,
+            deploymentname: this.$store.state.deploymentname
           },
          }
       },
@@ -73,17 +74,19 @@
               "kind": "Service",
               "apiVersion": "v1",
               "metadata": {
-                "name": this.form.serviceName,
+                "name": this.form.servicename,
                 "namespace": this.form.namespace,
               },
               "spec": {
                 "ports": [
                   {
                     "protocol": "TCP",
-                    "port": this.form.servicePort                  }
+                    "port": this.form.serviceport,
+                    "targetPort": this.form.targetport,
+                  }
                 ],
                 "selector": {
-                  "app": this.form.deploymentName
+                  "app": this.form.deploymentname
                 },
               }
             }
@@ -93,14 +96,24 @@
            }
          },
      methods: {
+       commitChanges () {
+         this.$store.commit('setServiceName', this.form.servicename)
+         this.$store.commit('setServicePort', this.form.serviceport)
+         this.$store.commit('setContainerPort', this.form.targetPort)
+         this.$store.commit('setTargetPort', this.form.targetPort)
+         this.$store.commit('setNamespace', this.form.namespace)
+         this.$store.commit('setAppName', this.form.deploymentname)
+       },
        openIngress () {
+         this.commitChanges()
          this.$router.push({ name: 'Ingress' })
        },
        openDeployment () {
+         this.commitChanges()
          this.$router.push({ name: 'Deployment' })
        }
-     }
-    }
+     },
+   }
 </script>
 
 <style scoped>

@@ -12,11 +12,11 @@
                   <b-form>
 
                     <b-form-group label="deployment name:">
-                      <b-form-input v-model="form.deploymentName" required></b-form-input>
+                      <b-form-input v-model="form.deploymentname" required></b-form-input>
                     </b-form-group>
 
                     <b-form-group label="image name:" description="schema: registry.datexis.com/<namespace>/<imagename>:<tag>">
-                      <b-form-input v-model="form.imageName" required></b-form-input>
+                      <b-form-input v-model="form.imagename" required></b-form-input>
                     </b-form-group>
 
                     <b-form-group label="namespace:">
@@ -24,11 +24,11 @@
                     </b-form-group>
 
                     <b-form-group label="container port:">
-                      <b-form-input v-model="form.containerPort" required></b-form-input>
+                      <b-form-input v-model="form.containerport" required></b-form-input>
                     </b-form-group>
 
                     <b-form-group label="container name:">
-                      <b-form-input v-model="form.containerName" required></b-form-input>
+                      <b-form-input v-model="form.containername" required></b-form-input>
                     </b-form-group>
 
                     <b-form-group label="choose advanced settings:" class="annotations">
@@ -84,15 +84,14 @@
       data() {
         return {
           form: {
-            imageName: '',
-            deploymentName: '',
-            containerName: '',
-            namespace: '',
-            containerPort: '',
-            cpuRequest: ''
+            imagename: this.$store.state.imagename,
+            deploymentname: this.$store.state.deploymentname,
+            containername: this.$store.state.containername,
+            targetPort: this.$store.state.targetport,
+            namespace: this.$store.state.namespace,
+            containerport: this.$store.state.containerport
           },
            options: ['', 'restriction to beuth network', 'cors-allow-origin'],
-           sourceRange: '*',
          }
       },
 
@@ -102,34 +101,34 @@
               "kind": "Deployment",
               "apiVersion": "extensions/v1beta1",
               "metadata": {
-               "name": this.form.deploymentName,
+               "name": this.form.deploymentname,
                "namespace": this.form.namespace,
                "labels": {
-                 "app": this.form.deploymentName
+                 "app": this.form.deploymentname
                },
               },
               "spec": {
                "replicas": 1,
                "selector": {
                  "matchLabels": {
-                   "app": this.form.deploymentName
+                   "app": this.form.deploymentname
                  }
                },
                "template": {
                  "metadata": {
                    "labels": {
-                     "app": this.form.deploymentName
+                     "app": this.form.deploymentname
                    }
                  },
                  "spec": {
                    "containers": [
                      {
-                       "name": this.form.containerName,
-                       "image": this.form.imageName,
+                       "name": this.form.containername,
+                       "image": this.form.imagename,
                        "ports": [
                          {
                            "name": "client-port",
-                           "containerPort": this.form.containerPort,
+                           "containerPort": this.form.containerport,
                            "protocol": "TCP"
                          }
                        ],
@@ -152,6 +151,12 @@
          },
       methods: {
         openService () {
+          this.$store.commit('setAppName', this.form.deploymentname)
+          this.$store.commit('setTargetPort', this.form.containerport)
+          this.$store.commit('setContainerPort', this.form.containerport)
+          this.$store.commit('setContainerName', this.form.containername)
+          this.$store.commit('setNamespace', this.form.namespace)
+          this.$store.commit('setImageName', this.form.imagename)
           this.$router.push({ name: 'Service' })
         }
       }
