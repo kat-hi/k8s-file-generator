@@ -1,190 +1,175 @@
 <template>
-  <div>
-    <b-card class="card text-left">
+  <div class="text-left main">
+    <h3 class="heading">Deployment Configuration</h3>
+    <div class="text-right">
+      <b-button @click="openService" class="button">safe and create service <b-icon class="icon" icon="arrow-right-circle"></b-icon></b-button>
+    </div>
       <b-row no-gutters>
-        <b-col md="6">
-          <b-card-body title="deployment configuration">
-            <b-form>
-              <b-form-group id="input-group-1" label="custom ingress name:" label-for="input-1">
-                <b-form-input
-                  id="input-1"
-                  v-model="form.ingressName"
-                  required
-                  placeholder="choose a custom ingress name">
-                </b-form-input>
-              </b-form-group>
+        <b-col>
+                <b-card-body class="card">
+                  <b-form>
 
-              <b-form-group id="input-group-2" small label="domain:" label-for="input-2">
-                <b-form-select
-                 id="input-2"
-                 v-model="form.domainName"
-                 :options="domains"
-                 required>
-               </b-form-select>
-             </b-form-group>
+                    <b-form-group label="deployment name:">
+                      <b-form-input v-model="form.deploymentName" required placeholder="choose a custom deployment name"></b-form-input>
+                    </b-form-group>
 
-              <b-form-group id="input-group-1" label="subdomain:" label-for="input-1">
-                <b-form-input
-                  id="input-1"
-                  v-model="form.prefix"
-                  required
-                  placeholder="what's your subdomain name?">
-                </b-form-input>
-              </b-form-group>
+                    <b-form-group label="image name:" description="schema: registry.datexis.com/<namespace>/<imagename>:<tag>">
+                      <b-form-input v-model="form.imageName" required placeholder="what's imagename?"></b-form-input>
+                    </b-form-group>
 
-              <b-form-group
-                id="input-group-3"
-                label="service name:"
-                label-for="input-3">
-                <b-form-input
-                  id="input-3"
-                  v-model="form.serviceName"
-                  required
-                  placeholder="what's your service name?">
-                </b-form-input>
-              </b-form-group>
+                    <b-form-group label="namespace:">
+                      <b-form-input v-model="form.namespace" required placeholder="where to deploy?"></b-form-input>
+                    </b-form-group>
 
-              <b-form-group
-                id="input-group-4"
-                label="service port:"
-                label-for="input-4">
-                <b-form-input
-                  id="input-4"
-                  v-model="form.servicePort"
-                  required
-                  placeholder="what's your service port?">
-                </b-form-input>
-              </b-form-group>
+                    <b-form-group label="container port:">
+                      <b-form-input v-model="form.containerPort" required placeholder="what's your container port?"></b-form-input>
+                    </b-form-group>
 
-              <b-form-group
-                id="input-group-4"
-                label="namespace:"
-                label-for="input-4">
-                <b-form-input
-                  id="input-4"
-                  v-model="form.namespace"
-                  required
-                  placeholder="where to deploy?">
-                </b-form-input>
-              </b-form-group>
+                    <b-form-group label="container name:">
+                      <b-form-input v-model="form.containerPort" required placeholder="what's your container name?"></b-form-input>
+                    </b-form-group>
 
-              <b-form-group label="choose more annotations:" class="annotations">
-                <b-form-checkbox-group
-                  v-model="selected"
-                  :options="options"
-                  name="flavour-2a"
-                  stacked>
-                </b-form-checkbox-group>
-              </b-form-group>
-            </b-form>
-          </b-card-body>
+                    <b-form-group label="choose advanced settings:" class="annotations">
+                      <b-form-group label="CPU requests:">
+                        <b-form-select
+                          :options="[{ text: 'Choose...', value: null }, '1', '2', '3', '4', '5', '6', '7', '8']"
+                          :value="null"></b-form-select>
+                      </b-form-group>
+
+                      <b-form-group label="CPU limits:">
+                        <b-form-select
+                          :options="[{ text: 'Choose...', value: null }, '1', '2', '3', '4', '5', '6', '7', '8']"
+                          :value="null"></b-form-select>
+                      </b-form-group>
+
+                      <b-form-group id="input-group-5" label="memory requests:" label-for="input-5">
+                        <b-form-select
+                          :options="[{ text: 'Choose...', value: null }, '2', '4', '8', '16', '32', '64', '128', '256']"
+                          :value="null"
+                        ></b-form-select>
+                      </b-form-group>
+
+                      <b-form-group label="memory limits:">
+                        <b-form-select
+                          :options="[{ text: 'Choose...', value: null }, '2', '4', '8', '16', '32', '64', '128', '256']"
+                          :value="null"
+                        ></b-form-select>
+                      </b-form-group>
+
+                    </b-form-group>
+                  </b-form>
+                </b-card-body>
         </b-col>
-        <b-col md="6">
-          <b-card-body class="body2">
-            <b-card-text>
-              <b-card header="json file" class="header" v-b-toggle.accordion-1>
-                  <b-collapse id="accordion-1" visible accordion="my-accordion" role="tabpanel">
-                    <pre>{{ jsonfile }}</pre>
-                  </b-collapse>
-              </b-card>
-              <b-card header="yaml file" v-b-toggle.accordion-2>
-                <b-collapse id="accordion-2" visible accordion="my-accordion" role="tabpanel">
-                  <pre>{{ yamlfile }}</pre>
-                </b-collapse>
-              </b-card>
-            </b-card-text>
-          </b-card-body>
+        <b-col>
+          <JsonContainer :jsonfile="jsonfile"/>
+        </b-col>
+        <b-col>
+          <YamlContainer :yamlfile="yamlfile"/>
         </b-col>
       </b-row>
-    </b-card>
   </div>
 </template>
 
 <script>
+  import YamlContainer from '@/components/YamlContainer'
+  import JsonContainer from '@/components/JsonContainer'
+
   export default {
     name: 'Deployment',
+    components: { YamlContainer, JsonContainer },
+
       data() {
         return {
           form: {
-            ingressName: '',
-            servicePort: '',
-            serviceName: '',
-            domainName: '',
-            prefix: '',
+            imageName: '',
+            deploymentName: '',
+            containerName: '',
             namespace: '',
+            containerPort: '',
+            cpuRequest: ''
           },
-           domains: [{ text: 'Select One', value: "" }, 'demo.datexis.com', 'apps.datexis.com', 'internal.datexis.com', 'api.datexis.com'],
-           options: ['enable CORS', 'restriction to beuth network', 'cors-allow-origin'],
-           sourceRange: '*'
+           options: ['', 'restriction to beuth network', 'cors-allow-origin'],
+           sourceRange: '*',
          }
       },
 
       computed: {
         jsonfile () {
           return {
-               "kind": "Ingress",
-               "apiVersion": "extensions/v1beta1",
-               "metadata": {
-                 "name": this.form.ingressName,
-                 "namespace": this.form.namespace,
-                 "annotations": {
-                   "cert-manager.io/cluster-issuer": "letsencrypt",
-                   "kubernetes.io/ingress.class": "nginx"
+              "kind": "Deployment",
+              "apiVersion": "extensions/v1beta1",
+              "metadata": {
+               "name": this.form.deploymentName,
+               "namespace": this.form.namespace,
+               "labels": {
+                 "app": this.form.deploymentName
+               },
+              },
+              "spec": {
+               "replicas": 1,
+               "selector": {
+                 "matchLabels": {
+                   "app": this.form.deploymentName
                  }
                },
-               "spec": {
-                 "tls": [
-                   {
-                     "hosts": [
-                       this.form.prefix + "." + this.form.domainName
-                     ],
-                     "secretName": this.form.prefix + "-" + this.form.namespace + "ingress-tls"
+               "template": {
+                 "metadata": {
+                   "labels": {
+                     "app": this.form.deploymentName
                    }
-                 ],
-                 "rules": [
-                   {
-                     "host": this.form.prefix + "." + this.form.domainName,
-                     "http": {
-                       "paths": [
+                 },
+                 "spec": {
+                   "containers": [
+                     {
+                       "name": this.form.containerName,
+                       "image": this.form.imageName,
+                       "ports": [
                          {
-                           "backend": {
-                             "serviceName": this.form.serviceName,
-                             "servicePort": this.form.servicePort
-                           }
+                           "name": "client-port",
+                           "containerPort": this.form.containerPort,
+                           "protocol": "TCP"
                          }
-                       ]
+                       ],
+                       },
+                   ],
+                   "imagePullSecrets": [
+                     {
+                       "name": "private-registry-auth"
                      }
-                   }
-                ]
-               }
-             }
+                   ],
+                   "schedulerName": "default-scheduler"
+                 }
+               },
+              }
+            }
            },
            yamlfile () {
               return "your yamlfile"
            }
-
+         },
+      methods: {
+        openService () {
+          this.$router.push({ name: 'Service' })
+        }
       }
     }
 </script>
 
-<style>
-.card {
-  margin: 2vw 4vw 2vw 4vw;
+<style scoped>
+
+.row, .col {
+  margin: 0;
+  padding: 0;
 }
-.select {
-  font-size: 10px
+.heading {
+  margin: 4vw 0vw 2vw 0vw;
 }
-#input-group-1 {
-  margin-top: 2vw;
-}
-.header {
-  margin-top: 5vw
-}
-.body2 {
-  height: 75%
-}
-.annotations {
-  margin-top: 2vw
+.main {
+  padding: 0vw 3vw 0vw 3vw;
 }
 
+.button {
+  width: 245px;
+  margin-right: 2vw
+}
 </style>

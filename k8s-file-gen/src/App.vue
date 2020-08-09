@@ -25,13 +25,4 @@
   max-width: 99vw;
 }
 
-#nav {
-  a {
-    font-weight: bold;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 </style>

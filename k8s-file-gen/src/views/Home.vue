@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <div class="row">
-     <div>
+    <div class="row main">
+     <b-col>
       <b-card class="deploymentCard"
           img-alt="Image"
           img-top
@@ -16,9 +15,9 @@
         </b-card-text>
         <b-button class="button" @click="openDeployment" variant="light"><b-icon icon="arrow-right-circle"></b-icon></b-button>
       </b-card>
-    </div>
+    </b-col>
 
-    <div>
+    <b-col>
       <b-card class="serviceCard"
       img-alt="Image"
       img-top
@@ -31,9 +30,9 @@
         </b-card-text>
         <b-button class="button" @click="openService" variant="light"><b-icon icon="arrow-right-circle"></b-icon></b-button>
       </b-card>
-    </div>
+    </b-col>
 
-    <div>
+    <b-col>
       <b-card class="ingressCard"
         img-alt="Image"
         img-top
@@ -48,8 +47,7 @@
         </b-card-text>
         <b-button @click="openIngress" variant="light"><b-icon icon="arrow-right-circle"></b-icon></b-button>
         </b-card>
-    </div>
-  </div>
+    </b-col>
   </div>
 </template>
 
@@ -71,7 +69,7 @@
 }
 </script>
 
-<style>
+<style scoped>
   .row {
     justify-content: space-around;
     padding: 8vw;

@@ -1,108 +1,67 @@
 <template>
-  <div>
-    <b-card class="card text-left">
-      <b-row no-gutters>
-        <b-col md="6">
-          <b-card-body title="ingress configuration">
-            <b-form>
-              <b-form-group id="input-group-1" label="custom ingress name:" label-for="input-1">
-                <b-form-input
-                  id="input-1"
-                  v-model="form.ingressName"
-                  required
-                  placeholder="choose a custom ingress name">
-                </b-form-input>
-              </b-form-group>
+  <div class="text-left main">
+    <h3 class="heading">Ingress Configuration</h3>
 
-              <b-form-group id="input-group-2" small label="domain:" label-for="input-2">
-                <b-form-select
-                 id="input-2"
-                 v-model="form.domainName"
-                 :options="domains"
-                 required>
-               </b-form-select>
-             </b-form-group>
+    <div class="text-left">
+      <b-button @click="openService" class="left-button"><b-icon class="left-icon" icon="arrow-left-circle"></b-icon>safe & go back</b-button>
+    </div>
+        <b-row no-gutters>
+        <b-col>
+                <b-card-body class="card">
+                  <b-form>
+                    <b-form-group label="custom ingress name:">
+                      <b-form-input v-model="form.ingressName" required placeholder="choose a custom ingress name"></b-form-input>
+                    </b-form-group>
 
-              <b-form-group id="input-group-1" label="subdomain:" label-for="input-1">
-                <b-form-input
-                  id="input-1"
-                  v-model="form.prefix"
-                  required
-                  placeholder="what's your subdomain name?">
-                </b-form-input>
-              </b-form-group>
+                    <b-form-group small label="domain:">
+                      <b-form-select v-model="form.domainName" :options="domains" required></b-form-select>
+                   </b-form-group>
 
-              <b-form-group
-                id="input-group-3"
-                label="service name:"
-                label-for="input-3">
-                <b-form-input
-                  id="input-3"
-                  v-model="form.serviceName"
-                  required
-                  placeholder="what's your service name?">
-                </b-form-input>
-              </b-form-group>
+                    <b-form-group label="subdomain:">
+                      <b-form-input v-model="form.prefix" required placeholder="what's your subdomain name?"></b-form-input>
+                    </b-form-group>
 
-              <b-form-group
-                id="input-group-4"
-                label="service port:"
-                label-for="input-4">
-                <b-form-input
-                  id="input-4"
-                  v-model="form.servicePort"
-                  required
-                  placeholder="what's your service port?">
-                </b-form-input>
-              </b-form-group>
+                    <b-form-group label="service name:">
+                      <b-form-input v-model="form.serviceName" required placeholder="what's your service name?"></b-form-input>
+                    </b-form-group>
 
-              <b-form-group
-                id="input-group-4"
-                label="namespace:"
-                label-for="input-4">
-                <b-form-input
-                  id="input-4"
-                  v-model="form.namespace"
-                  required
-                  placeholder="where to deploy?">
-                </b-form-input>
-              </b-form-group>
+                    <b-form-group label="service port:">
+                      <b-form-input v-model="form.servicePort" required placeholder="what's your service port?"></b-form-input>
+                    </b-form-group>
 
-              <b-form-group label="choose more annotations:" class="annotations">
-                <b-form-checkbox-group
-                  v-model="selected"
-                  :options="options"
-                  name="flavour-2a"
-                  stacked>
-                </b-form-checkbox-group>
-              </b-form-group>
-            </b-form>
-          </b-card-body>
+                    <b-form-group label="namespace:">
+                      <b-form-input v-model="form.namespace" required placeholder="where to deploy?"></b-form-input>
+                    </b-form-group>
+
+                    <b-form-group label="choose more annotations:" class="annotations">
+                      <b-form-checkbox-group
+                        v-model="selected"
+                        :options="options"
+                        name="flavour-2a"
+                        stacked>
+                      </b-form-checkbox-group>
+                    </b-form-group>
+                  </b-form>
+                </b-card-body>
         </b-col>
-        <b-col md="6">
-          <b-card-body class="body2">
-            <b-card-text>
-              <b-card header="json file" class="header" v-b-toggle.accordion-1>
-                  <b-collapse id="accordion-1" visible accordion="my-accordion" role="tab">
-                    <pre>{{ jsonfile }}</pre>
-                  </b-collapse>
-              </b-card>
-              <b-card header="yaml file" v-b-toggle.accordion-2>
-                <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
-                  <pre>{{ yamlfile }}</pre>
-                </b-collapse>
-              </b-card>
-            </b-card-text>
-          </b-card-body>
+        <b-col>
+          <JsonContainer :jsonfile="jsonfile"/>
+        </b-col>
+        <b-col>
+          <YamlContainer :yamlfile="yamlfile"/>
         </b-col>
       </b-row>
-    </b-card>
   </div>
 </template>
 
 <script>
+  import YamlContainer from '@/components/YamlContainer'
+  import JsonContainer from '@/components/JsonContainer'
+
   export default {
     name: 'Ingress',
+    components: { YamlContainer, JsonContainer },
+
       data() {
         return {
           form: {
@@ -162,29 +121,31 @@
            yamlfile () {
               return "your yamlfile"
            }
-
-      }
+         },
+     methods: {
+       openService () {
+         this.$router.push({ name: 'Service' })
+       }
+     }
     }
 </script>
 
-<style>
-.card {
-  margin: 2vw 4vw 2vw 4vw;
+<style scoped>
+.row, .col {
+  margin: 0;
+  padding: 0;
 }
-.select {
-  font-size: 10px
+.left-icon {
+  margin-right: 1vw
 }
-#input-group-1 {
-  margin-top: 2vw;
+.heading {
+  margin: 4vw 0vw 2vw 0vw;
 }
-.header {
-  margin-top: 5vw
-}
-.body2 {
-  height: 75%
-}
-.annotations {
-  margin-top: 2vw
+.left-button {
+  margin-bottom: 2vw
 }
 
+.main {
+  padding: 0vw 3vw 0vw 3vw;
+}
 </style>

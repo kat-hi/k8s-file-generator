@@ -1,7 +1,7 @@
 <template>
   <div>
       <b-navbar toggleable="xl" type="dark" variant="dark">
-        <b-navbar-brand href="Home" class="brand">K8s-Files-Generator</b-navbar-brand>
+        <b-navbar-brand @click="goHome" class="brand">K8s-Files-Generator</b-navbar-brand>
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
@@ -19,6 +19,11 @@ export default {
   name: 'Navigation',
   components: {
     NavigationElement
+  },
+  methods: {
+    goHome() {
+      this.$router.push({ name: 'Home' })
+    },
   }
 }
 </script>
