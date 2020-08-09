@@ -1,6 +1,6 @@
 <template>
   <div>
-      <b-navbar toggleable="xl" type="dark" variant="light">
+      <b-navbar toggleable="xl" variant="light">
         <b-navbar-brand @click="goHome" class="brand">K8s-Files-Generator</b-navbar-brand>
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <b-collapse id="nav-collapse" is-nav>
