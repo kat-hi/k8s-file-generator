@@ -1,9 +1,11 @@
 <template>
   <div class="text-left main">
     <h3 class="heading">Deployment Configuration</h3>
-    <div class="text-right">
-      <b-button @click="openService" class="button">safe and create service <b-icon class="icon" icon="arrow-right-circle"></b-icon></b-button>
-    </div>
+    <b-row>
+      <b-col class="my-3">
+        <DefaultButton @click="openService" class="float-right" iconname="arrow-right-circle" title="safe & view service"/>
+      </b-col>
+    </b-row>
       <b-row no-gutters>
         <b-col>
                 <b-card-body class="card">
@@ -73,10 +75,11 @@
 <script>
   import YamlContainer from '@/components/YamlContainer'
   import JsonContainer from '@/components/JsonContainer'
+  import DefaultButton from '@/components/DefaultButton'
 
   export default {
     name: 'Deployment',
-    components: { YamlContainer, JsonContainer },
+    components: { YamlContainer, JsonContainer, DefaultButton },
 
       data() {
         return {
@@ -144,7 +147,7 @@
             }
            },
            yamlfile () {
-              return "your yamlfile"
+              return this.jsonfile
            }
          },
       methods: {
@@ -162,7 +165,7 @@
   padding: 0;
 }
 .heading {
-  margin: 4vw 0vw 2vw 0vw;
+  margin: 4vw 0vw 1vw 0vw;
 }
 .main {
   padding: 0vw 3vw 0vw 3vw;

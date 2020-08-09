@@ -1,6 +1,14 @@
 <template>
   <div class="text-left main">
     <h3 class="heading">Service Configuration</h3>
+    <b-row>
+      <b-col class="my-3">
+        <DefaultButton @click="openDeployment" class="float-left" iconname="arrow-left-circle" title="safe & go back"/>
+      </b-col>
+      <b-col class="my-3">
+        <DefaultButton @click="openIngress" class="float-right" iconname="arrow-right-circle" title="safe & view ingress"/>
+      </b-col>
+    </b-row>
       <b-row no-gutters>
         <b-col>
                 <b-card-body class="card">
@@ -32,10 +40,8 @@
       </b-row>
       <b-row>
         <div class="text-left">
-          <b-button @click="openDeployment" class="left-button"><b-icon class="left-icon" icon="arrow-left-circle"></b-icon>safe & go back</b-button>
         </div>
         <div class="text-right">
-          <b-button @click="openIngress" class="right-button">safe & create ingress <b-icon class="right-icon" icon="arrow-right-circle"></b-icon></b-button>
         </div>
       </b-row>
   </div>
@@ -44,10 +50,11 @@
 <script>
   import YamlContainer from '@/components/YamlContainer'
   import JsonContainer from '@/components/JsonContainer'
+  import DefaultButton from '@/components/DefaultButton'
 
   export default {
     name: 'Service',
-    components: { YamlContainer, JsonContainer },
+    components: { YamlContainer, JsonContainer, DefaultButton },
 
       data() {
         return {
@@ -102,44 +109,12 @@
   padding: 0;
 }
 .heading {
-  margin: 4vw 0vw 2vw 0vw;
-}
-
-.right-icon {
-  margin-left: 1vw
-}
-.left-icon {
-  margin-right: 1vw
+  margin: 4vw 0vw 1vw 0vw;
 }
 .card {
   margin-top: 1.88vh
 }
-.right-button {
-  width: 260px;
-  margin-right: 2vw;
-  position: absolute;
-  right: 5%
-}
-.left-button {
-  width: 260px;
-  position: absolute;
-  left: 5%
-}
-
 .main {
   padding: 0vw 3vw 0vw 3vw;
 }
-@media only screen and (max-device-width : 600px) {
-  .right-button {
-    width: 260px;
-    margin: 2vw 0vw 2vw 0vw;
-    position: relative;
-    display: block
-  }
-  .left-button {
-    width: 260px;
-    position: relative;
-    display: block
-  }
- }
 </style>

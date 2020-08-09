@@ -4,6 +4,8 @@ import Home from '../views/Home.vue'
 import Deployment from '../views/Deployment'
 import Service from '../views/Service'
 import Ingress from '../views/Ingress'
+import Overview from '../views/Overview'
+
 
 
 Vue.use(VueRouter)
@@ -28,6 +30,11 @@ Vue.use(VueRouter)
     path: '/ingress',
     name: 'Ingress',
     component: Ingress
+  },
+  {
+    path: '/overview',
+    name: 'Overview',
+    component: Overview
   }
 ]
 

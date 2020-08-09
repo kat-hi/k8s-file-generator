@@ -1,10 +1,14 @@
 <template>
   <div class="text-left main">
     <h3 class="heading">Ingress Configuration</h3>
-
-    <div class="text-left">
-      <b-button @click="openService" class="left-button"><b-icon class="left-icon" icon="arrow-left-circle"></b-icon>safe & go back</b-button>
-    </div>
+      <b-row>
+        <b-col class="my-3">
+          <DefaultButton @click="openService" class="float-left" iconname="arrow-left-circle" title="safe & go back"/>
+        </b-col>
+        <b-col class="my-3">
+          <DefaultButton @click="openAll" class="float-right" iconname="arrow-right-circle" title="safe & view all files"/>
+        </b-col>
+      </b-row>
         <b-row no-gutters>
         <b-col>
                 <b-card-body class="card">
@@ -57,10 +61,11 @@
 <script>
   import YamlContainer from '@/components/YamlContainer'
   import JsonContainer from '@/components/JsonContainer'
+  import DefaultButton from '@/components/DefaultButton'
 
   export default {
     name: 'Ingress',
-    components: { YamlContainer, JsonContainer },
+    components: { YamlContainer, JsonContainer, DefaultButton },
 
       data() {
         return {
@@ -125,6 +130,9 @@
      methods: {
        openService () {
          this.$router.push({ name: 'Service' })
+       },
+       viewAll () {
+         this.$router.push({ name: 'Overview' })
        }
      }
     }
@@ -138,16 +146,9 @@
 .card {
   margin-top: 1.88vh
 }
-.left-icon {
-  margin-right: 1vw
-}
 .heading {
-  margin: 4vw 0vw 2vw 0vw;
+  margin: 4vw 0vw 1vw 0vw;
 }
-.left-button {
-  margin-bottom: 2vw
-}
-
 .main {
   padding: 0vw 3vw 0vw 3vw;
 }
