@@ -9,9 +9,9 @@ spec:
   tls:
   - secretName: "file-generator-ingress-tls"
     hosts:
-    - "filegenerator.apps.datexis.com"
+    - "filegenerator.app.datexis.com"
   rules:
-  - host: "filegenerator.apps.datexis.com"
+  - host: "filegenerator.app.datexis.com"
     http:
       paths:
       - path: 
