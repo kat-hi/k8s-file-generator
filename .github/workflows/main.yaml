@@ -1,4 +1,4 @@
-name: sweb-backend-dev
+name: file-generator
 
 on:
   push:
