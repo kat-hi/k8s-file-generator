@@ -6,7 +6,6 @@
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
             <NavigationElement route="Home" title="Home" />
-            <NavigationElement route="Notes" title="Notes" />
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
