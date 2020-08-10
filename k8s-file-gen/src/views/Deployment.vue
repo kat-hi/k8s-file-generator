@@ -180,8 +180,4 @@
 .card {
   margin-top: 1.88vh
 }
-.button {
-  width: 245px;
-  margin-right: 2vw
-}
 </style>
