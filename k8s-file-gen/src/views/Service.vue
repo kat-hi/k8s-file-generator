@@ -124,7 +124,7 @@
   padding: 0;
 }
 .heading {
-  margin: 4vw 0vw 1vw 0vw;
+  margin: 3vw 0vw 0vw 0vw;
 }
 .card {
   margin-top: 1.88vh

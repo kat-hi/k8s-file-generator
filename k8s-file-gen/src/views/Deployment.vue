@@ -172,7 +172,7 @@
   padding: 0;
 }
 .heading {
-  margin: 4vw 0vw 1vw 0vw;
+  margin: 3vw 0vw 0vw 0vw;
 }
 .main {
   padding: 0vw 3vw 0vw 3vw;
