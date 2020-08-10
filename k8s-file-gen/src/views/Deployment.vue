@@ -146,7 +146,9 @@
             }
            },
            yamlfile () {
-              return this.jsonfile
+              let string
+              string = "kind: Deployment\napiVersion: extensions/v1beta1\nmetadata:\n  name: " + this.form.deploymentname + "\n  namespace: " + this.form.namespace + "\n  labels:\n    app: " + this.form.deploymentname + "\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      app: " + this.form.deploymentname + "\n  template:\n    metadata:\n      labels:\n        app: " + this.form.deploymentname + "\n    spec:\n      containers:\n      - name: " + this.form.containername + "\n        image: " + this.form.imagename + "\n        ports:\n        - name: client-port\n          containerPort: " + this.form.containerport + "\n          protocol: TCP\n      imagePullSecrets:\n      - name: private-registry-auth\n      schedulerName: default-scheduler\n"
+              return string
            }
          },
       methods: {

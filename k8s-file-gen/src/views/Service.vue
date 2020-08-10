@@ -92,7 +92,9 @@
             }
            },
            yamlfile () {
-              return "your yamlfile"
+              let string =
+             "kind: Service\napiVersion: v1\nmetadata:\n  name: " + this.form.servicename + "\n  namespace: " + this.form.namespace + "\nspec:\n  ports:\n  - protocol: TCP\n    port: " + this.form.serviceport + "\nselector:\n    app: " + this.form.deploymentname + "\n"
+             return string
            }
          },
      methods: {
