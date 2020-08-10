@@ -124,7 +124,10 @@
              }
            },
            yamlfile () {
-              return "your yamlfile"
+               let string
+               string =
+                   "kind: Ingress\napiVersion: extensions/v1beta1\nmetadata:\n  name: " + this.form.ingressname + "\n  namespace: " + this.form.namespace + "\n  annotations:\n    cert-manager.io/cluster-issuer: letsencrypt\n    kubernetes.io/ingress.class: nginx\nspec:\n  tls:\n   - hosts:\n    - " + this.form.subdomain + "." + this.form.domainname + "\n    secretName: " + this.form.subdomain + "-" + this.form.namespace + "-ingress-tls\n  rules:\n  - host: " + this.form.subdomain + "." + this.form.domainname +"\n    http:\n      paths:\n      - backend:\n          serviceName: " + this.form.servicename +"\n          servicePort: " + this.form.serviceport + "\n"
+              return string
            }
          },
      methods: {
