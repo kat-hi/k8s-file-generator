@@ -3,10 +3,10 @@
     <h3 class="heading">Ingress Configuration</h3>
       <b-row>
         <b-col class="my-3">
-          <DefaultButton @click="openService" class="float-left" iconname="arrow-left-circle" title="safe & go back"/>
+          <DefaultButton @click="openService" class="float-left" iconname="arrow-left-circle" title="save & go back"/>
         </b-col>
         <b-col class="my-3">
-          <DefaultButton @click="openAll" class="float-right" iconname="arrow-right-circle" title="safe & view all files"/>
+          <DefaultButton @click="openAll" class="float-right" iconname="arrow-right-circle" title="save & view all files"/>
         </b-col>
       </b-row>
         <b-row no-gutters>

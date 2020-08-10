@@ -3,7 +3,7 @@
     <h3 class="heading">Deployment Configuration</h3>
     <b-row>
       <b-col class="my-3">
-        <DefaultButton @click="openService" class="float-right" iconname="arrow-right-circle" title="safe & view service"/>
+        <DefaultButton @click="openService" class="float-right" iconname="arrow-right-circle" title="save & view service"/>
       </b-col>
     </b-row>
       <b-row no-gutters>
@@ -87,7 +87,7 @@
             imagename: this.$store.state.imagename,
             deploymentname: this.$store.state.deploymentname,
             containername: this.$store.state.containername,
-            targetPort: this.$store.state.targetport,
+            targetPort: this.$store.state.containerport,
             namespace: this.$store.state.namespace,
             containerport: this.$store.state.containerport
           },

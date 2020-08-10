@@ -3,10 +3,10 @@
     <h3 class="heading">Service Configuration</h3>
     <b-row>
       <b-col class="my-3">
-        <DefaultButton @click="openDeployment" class="float-left" iconname="arrow-left-circle" title="safe & go back"/>
+        <DefaultButton @click="openDeployment" class="float-left" iconname="arrow-left-circle" title="save & go back"/>
       </b-col>
       <b-col class="my-3">
-        <DefaultButton @click="openIngress" class="float-right" iconname="arrow-right-circle" title="safe & view ingress"/>
+        <DefaultButton @click="openIngress" class="float-right" iconname="arrow-right-circle" title="save & view ingress"/>
       </b-col>
     </b-row>
       <b-row no-gutters>
@@ -60,7 +60,7 @@
         return {
           form: {
             serviceport: this.$store.state.serviceport,
-            targetport: this.$store.state.targetport,
+            targetport: this.$store.state.containerport,
             servicename: this.$store.state.servicename,
             namespace: this.$store.state.namespace,
             deploymentname: this.$store.state.deploymentname
